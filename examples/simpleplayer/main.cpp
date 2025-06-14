@@ -22,7 +22,17 @@
 #include <QtAVWidgets>
 
 int main(int argc, char *argv[])
-{
+{    // 设置GL参数
+    QSurfaceFormat format;
+    format.setDepthBufferSize(24);
+    format.setStencilBufferSize(8);
+    format.setVersion(4, 5);
+    format.setProfile(QSurfaceFormat::CoreProfile);
+    format.setSwapBehavior(QSurfaceFormat::DoubleBuffer);
+    // 开启垂直同步，如果不开启，则GPU占用率可能直接飙升到100%
+    // 设置前后缓冲区交换时间至少为1帧, 限制了最大帧率为屏幕刷新率, 减少了GPU占用
+    format.setSwapInterval(1);
+    QSurfaceFormat::setDefaultFormat(format);
     QtAV::Widgets::registerRenderers();
     QApplication a(argc, argv);
     PlayerWindow player;

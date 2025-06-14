@@ -383,6 +383,7 @@ if(WIN32 OR WindowsStore OR WindowsPhone)
     list(APPEND SOURCES
       codec/video/VideoDecoderD3D11.cpp
       directx/SurfaceInteropD3D11.cpp
+      directx/SurfaceInteropD3D11GL.cpp
       directx/D3D11VP.cpp
     )
     if(HAVE_EGL)
@@ -406,6 +407,7 @@ if(WIN32 OR WindowsStore OR WindowsPhone)
     list(APPEND SOURCES
       output/audio/AudioOutputDSound.cpp
       directx/SurfaceInteropD3D9.cpp
+      directx/SurfaceInteropD3D9GL.cpp
       codec/video/VideoDecoderDXVA.cpp
     )
     if(HAVE_EGL)
