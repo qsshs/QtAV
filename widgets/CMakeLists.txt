@@ -47,6 +47,8 @@ if(WIN32)
 endif()
 # add HEADERS for moc
 add_library(${MODULE} SHARED ${SOURCES} ${RESOURCES_SOURCES} ${HEADERS} ${RC_FILE})
+target_compile_options(${MODULE} PRIVATE /Zi)
+target_link_options(${MODULE} PRIVATE /DEBUG)
 target_link_libraries(${MODULE}
   LINK_PRIVATE ${EXTRA_LIBS}
   LINK_PUBLIC QtAV Qt5::Widgets

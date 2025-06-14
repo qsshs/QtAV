@@ -498,6 +498,8 @@ if(WIN32)
 endif()
 # add HEADERS for moc
 add_library(${MODULE} SHARED ${SOURCES} ${RESOURCES_SOURCES} ${HEADERS} ${RC_FILE})
+target_compile_options(${MODULE} PRIVATE /Zi)
+target_link_options(${MODULE} PRIVATE /DEBUG)
 
 list(REMOVE_DUPLICATES EXTRA_LIBS)
 # qt5_use_modules(since 2.8.9) is deprecated since cmake 2.8.11
