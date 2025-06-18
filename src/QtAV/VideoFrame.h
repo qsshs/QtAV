@@ -101,6 +101,9 @@ public:
      * \param roi NOT implemented!
      */
     QImage toImage(QImage::Format fmt = QImage::Format_ARGB32, const QSize& dstSize = QSize(), const QRectF& roi = QRect()) const;
+    // simple version
+    // no copy, it can be copied by user
+    QImage toImageSimple(QImage::Format fmt = QImage::Format_ARGB32, const QSize& dstSize = QSize(), const QRectF& roi = QRect()) const;
     /*!
      * \brief to
      * The result frame data is always on host memory. If video frame data is already in host memory, and the target parameters are the same, then return the current frame.
