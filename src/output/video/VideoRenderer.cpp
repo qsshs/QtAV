@@ -637,7 +637,7 @@ bool VideoRenderer::onSetSaturation(qreal s)
 
 QColor VideoRenderer::backgroundColor() const
 {
-    return d_func().bg_color;
+    return QColor(255*0.2, 255*0.2, 255*0.2, 255);
 }
 
 void VideoRenderer::onSetBackgroundColor(const QColor &color)
