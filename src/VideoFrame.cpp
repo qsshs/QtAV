@@ -358,21 +358,6 @@ QImage VideoFrame::toImage(QImage::Format fmt, const QSize& dstSize, const QRect
     return image.copy();
 }
 
-
-QImage VideoFrame::toImageSimple(QImage::Format fmt, const QSize& dstSize, const QRectF& roi) const {
-    Q_D(const VideoFrame);
-    if (!d->qt_image.isNull()
-        && fmt == d->qt_image->format()
-        && dstSize == d->qt_image->size()
-        && (!roi.isValid() || roi == d->qt_image->rect())) {
-        return *d->qt_image.data();
-    }
-    VideoFrame f(to(VideoFormat(VideoFormat::pixelFormatFromImageFormat(fmt)), dstSize, roi));
-    if (!f)
-        return QImage();
-    return QImage(f.frameDataPtr(), f.width(), f.height(), f.bytesPerLine(0), fmt);
-}
-
 VideoFrame VideoFrame::to(const VideoFormat &fmt, const QSize& dstSize, const QRectF& roi) const
 {
     if (!isValid() || !constBits(0)) {// hw surface. map to host. only supports rgb packed formats now
@@ -393,8 +378,11 @@ VideoFrame VideoFrame::to(const VideoFormat &fmt, const QSize& dstSize, const QR
         }
         return VideoFrame();
     }
-    const int w = dstSize.width() > 0 ? dstSize.width() : width();
-    const int h = dstSize.height() > 0 ? dstSize.height() : height();
+    int w = dstSize.width() > 0 ? dstSize.width() : width();
+    int h = dstSize.height() > 0 ? dstSize.height() : height();
+    w = w == width() && h == height() ? w + 2 : w;
+    
+
     if (fmt.pixelFormatFFmpeg() == pixelFormatFFmpeg()
             && w == width() && h == height()
             // TODO: roi check.
