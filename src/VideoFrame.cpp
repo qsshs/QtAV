@@ -145,6 +145,7 @@ public:
     float displayAspectRatio;
     VideoFormat format;
     QScopedPointer<QImage> qt_image;
+    bool isKeyFrame;
 
     VideoSurfaceInteropPtr surface_interop;
 };
@@ -314,6 +315,16 @@ float VideoFrame::displayAspectRatio() const
 void VideoFrame::setDisplayAspectRatio(float displayAspectRatio)
 {
     d_func()->displayAspectRatio = displayAspectRatio;
+}
+
+void VideoFrame::setIsKeyFrame(const bool is)
+{
+    d_func()->isKeyFrame = is;
+}
+
+bool VideoFrame::isKeyFrame() const
+{
+    return d_func()->isKeyFrame;
 }
 
 ColorSpace VideoFrame::colorSpace() const

@@ -88,6 +88,8 @@ public:
     // display attributes
     float displayAspectRatio() const;
     void setDisplayAspectRatio(float displayAspectRatio);
+    void setIsKeyFrame(const bool is);
+    bool isKeyFrame()const;
     // TODO: pixel aspect ratio
     ColorSpace colorSpace() const;
     void setColorSpace(ColorSpace value);

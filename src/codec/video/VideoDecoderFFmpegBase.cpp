@@ -155,6 +155,7 @@ VideoFrame VideoDecoderFFmpegBase::frame()
         return VideoFrame();
     // it's safe if width, height, pixfmt will not change, only data change
     VideoFrame frame(d.frame->width, d.frame->height, VideoFormat((int)d.codec_ctx->pix_fmt));
+    frame.setIsKeyFrame(d.frame->key_frame == 1 ? true : false);
     frame.setDisplayAspectRatio(d.getDAR(d.frame));
     frame.setBits(d.frame->data);
     frame.setBytesPerLine(d.frame->linesize);
